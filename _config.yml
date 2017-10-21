@@ -1,70 +1,66 @@
-# Basic
-title: 2017
-subtitle: blog
-description: Welcome to my blog
-# 头像里面的标题
-avatarTitle: HTML5&CSS3
-# 头像里面的描述
-avatarDesc:  HELLOWORD
-url: "https://hi-craft.github.io"
+# Site settings 配置站点
+title: '2017'
+description: 'Winter is coming'
+keyword: '前端, 前端开发, 前端博客, javascript, 设计'
+url: 'https://hi-craft.github.io' # your host
 
-# Comment
-comment:
-    disqus: leopard
-    # uyan: 2143225  # 有言id,登录有言官网申请
+# if you don't need baseurl, you should leave this value blank.
+baseurl: ''
 
-# Social
-social:
-    weibo: 363511503
-    github: hi-craft
-    # twitter:
-    mail: 363511503@qq.com
-
-# 百度统计
-# 使用博客模板请去掉或者更换 id
-baidu:
-    id: 8ba1c6be0953b6f9c2ba38e57f615421
-
-# Google Analytics
-# 使用博客模板请去掉或者更换 id
-ga:
-    id: UA-84134159-3
-    host: auto
-
-
-# 《----------------- 上面的信息修改成你自己的 ---------------------------》
-#
-#
-#  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
-#
-#
-# 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
-
-
-permalink: /:year/:month/:title/
-# Format
-highlighter: rouge
-
-textColor: #FF0000
-
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: clear
-
-# The blog button should not be removed.
-blog_button:
-    title: HOME
-
-# Navigation buttons in the front page.s
+# Navigation links
 nav:
-    - {title: HISTORY, description: archive, url: '/archive'}
-    - {title: TAG, description: tags, url: '/tags'}
-    - {title: ABOUT, description: about, url: '/about'}
+  home: '/'
+  tags: '/tags.html'
 
+# Author 配置博主信息
+author: 'CODE'
+nickname: 'HACK'
+bio: '前端开发者，热爱技术&设计，简单乐观爱创造'
+avatar: '/assets/img/profile.png'
 
-# Pagination
-gems: [jekyll-paginate,jekyll-sitemap]
-paginate: 20
-paginate_path: "page/:num/"
+# Search
+search: true
 
+# Night mode
+nightMode: true
 
+# Comments
+disqus: false
+disqus_url: 'https://liaokeyu.disqus.com/embed.js'
+
+# Share
+social-share: true
+social-share-items: ['wechat', 'weibo', 'douban', 'twitter']
+
+# theme color 主题皮肤
+theme-color: 'default'  # pink or default
+
+# Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
+postPatterns: 'circuitBoard'
+
+# SNS settings 配置社交网站url: weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
+sns:
+  weibo: '//weibo.com/lovecolcol'
+  juejin: '//juejin.im/user/57a6f434165abd006159b4cc'
+  instagram: '//www.instagram.com/steveliaocn'
+  github: '//github.com/kaeyleo'
+
+# Tags 设置标签
+recommend-tags: true # whether or not display recommend-tags on the sidebar
+recommend-condition-size: 12 # a tag will be recommended if the size of it is more than this value
+
+# Build settings
+paginate: 6
+paginate_path: 'page:num'
+exclude: ['node_modules', 'dev', 'package.json', 'gulpfile.js', '.gitignore', 'README.md']
+
+# Markdown
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+
+RSS: false
+
+# Plugins
+gems: [jekyll-paginate]
