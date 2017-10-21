@@ -1,3 +1,6 @@
+# [BLOG 地址](hicraft.top)
+
+
 ## jekyll-theme-H2O
 
 ### Preview
