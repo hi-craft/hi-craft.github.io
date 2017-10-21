@@ -2,22 +2,6 @@
 
 ### Preview
 
-#### [在线预览 Live Demo →](http://liaokeyu.com/)
-
-![](screenshot/jekyll-theme-h2o-realhome.jpg)
-
-![](screenshot/jekyll-theme-h2o-realm.png)
-
-如果你喜欢这个博客模板，请在右上角star一下，非常感谢～
-
-If you like this theme or using it, please give a ⭐️ for motivation ;)
-
-如果想体验手机浏览效果，可以扫一下二维码：
-
-![](screenshot/1494404591.png)
-
-Using your smartphone to scan the QR Code
-
 ### Features 特性
 
 #### CN
@@ -33,36 +17,6 @@ Using your smartphone to scan the QR Code
 - 文章标签索引
 - 博客文章搜索
 - 复制文章内容自动添加版权
-
-#### EN
-
-- Code highlight
-- Night mode
-- Disqus Comment System
-- Theme color: Blue & Pink
-- Hero Patterns
-- Responsive design
-- SNS Icon
-- Title SEO
-- Tags system
-- Search
-- Copyright text on copy event
-
-### Usage 快速开始 
-
-首先你需要安装Jekyll，请查看文档: [快速指南](http://jekyll.com.cn/docs/quickstart/)
-
-如果你已经安装了Jekyll，请检查版本是否为3.0.x，你可以使用 ```gem update jekyll``` 命令进行升级。
-
-> H2O主题基于Jekyll 3.2.1版本，不同版本之间可能存在部分差异，具体请参考[官方更新文档](https://jekyllrb.com/news/)
-
-点击右上角Fork按钮在你的Github上创建分支，或者```clone```到本地。
-
-``` git clone https://github.com/kaeyleo/jekyll-theme-H2O.git ```
-
-最后，在命令行输入 ```jekyll server``` 开启服务，就能在本地预览主题了。
-
-如果需要部署到线上环境，请参照配置文档的 **开始** 章节进行操作。
 
 ### Document 配置文档
 
@@ -88,51 +42,6 @@ Using your smartphone to scan the QR Code
 - 集成服务 
 	- [Disqus](#Disqus)
 	- [Share.js](#Share.js)
-
-#### EN
-
-- Get Started
-	- [Site Settings](#站点信息)
-	- [Write Posts](#写一篇文章)
-- Components
-	- [Navigation Menu](#导航)
-	- [Sidebar](#侧边栏)
-	- [SNS Icons](#社交图标)
-	- [Personal Information](#个人简介)
-	- [Tags](#标签)
-	- [Search](#文章搜索)
-	- [Syntax Highlight](#代码高亮)
-	- [Night Mode](#夜间模式)
-- Style
-	- [Theme Color](#主题皮肤)
-	- [Hero Background Patterns](#头图底纹)
-- Advanced
-	- [Customization](#自定义)
-- Plugins
-	- [Disqus](#Disqus)
-	- [Share.js](#Share.js)
-
-
-You can easily get started by modifying _config.yml
-
-#### 站点信息
-
-你可以通用修改 `_config.yml` 文件来轻松的开始搭建自己的博客
-
-```
-# Site settings
-title: '廖柯宇的独立博客' # 你的博客网站标题
-description: '很高兴能在这里与你分享我对技术和生活的思考。' # 站点描述
-keyword: '廖柯宇, 廖柯宇的独立博客, 前端, 设计' # 网站关键词
-url: 'http://liaokeyu.com' # 站点url 
-baseurl: ''
- 
-# Build settings 
-paginate: 6 # 一页放几篇文章
-paginate_path: 'page:num'
-```
-
-其实大部分参数已经默认配置好了，你只需要通过文档了解它们，然后根据自己的需求去`_config.yml`文件里修改即可。
 
 #### 写一篇文章
 
@@ -170,12 +79,6 @@ exclude: ['node_modules', 'dev', 'package.json', '自定义的文件夹名字']
 
 这样做是为了在Jekyll运行时排除某些文件被复制到运行文件`_site`里去。
 
-#### 侧边栏
-
-![](screenshot/jekyll-theme-h2o-sideBar.png)
-
-侧边栏分为两个部分：【个人简介】和【推荐标签】。当屏幕宽度小于960px时，侧边栏会被隐藏。 
-
 #### 社交图标
 
 使用阿里的图标管理平台Iconfont整理了一套常用的社交图标用于博客的个人简介上，包括微博、知乎、掘金、简书、Github等十三个网站，并且对鼠标悬停时的样式颜色进行了优化。
@@ -211,8 +114,6 @@ Medium | `medium`
 
 #### 个人简介
 
-首页侧边栏和文章页面底部都会显示你的个人简介
-
 ```
 # Author 配置博主信息
 author: 'Jack'
@@ -243,14 +144,6 @@ Tags配置说明：
 
 ![](screenshot/jekyll-theme-h2o-search.png)
 
-基于Jekyll服务器生成文章索引文件 `search.json` 为博客提供搜索服务。输入文章标题或与文章标签相关的关键字即可。
-
-搜索功能默认是开启的，以卡片的样式显示在侧边栏底部。如需关闭请将配置文件 `_config.yml` 中 `search ` 属性的值改为 `false` 。 
-
-```
-# Search
-search: true
-```
 
 说明 | 参数
 ----|-----
