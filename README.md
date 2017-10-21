@@ -1,4 +1,4 @@
-# [BLOG 地址](hicraft.top)
+# [BLOG 地址](www.hicraft.top)
 
 
 ## jekyll-theme-H2O
