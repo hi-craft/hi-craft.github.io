@@ -751,4 +751,291 @@ test()方法接受一个字符串参数，在模式与该参数匹配的情况�
     if(pattern.test(text)){
     	alert("The pattern was matched");
     }
-# p107 #
+
+
+RegExp构造函数的属性
+
+长属性名 短属性名
+  
+    input   	 $_ 最近一次要匹配的字符串，opera未实现
+    
+    lastMatch    $& 最近一次的匹配项。opera未实现
+    
+    lastParen    $+ 最近一次匹配的捕获组。opera未实现
+    
+    leftContext  $` input字符串中lastMatch之前的文本
+    
+    multiline    $* 布尔值，表示是否所有表达式都使用多行模式
+    
+    rightContext $' input字符串中lastMatch之后的文本
+
+----------
+
+    var text = "this has been a short summer";
+    var pattern = /(.)hort/g;
+    if(pattern.test(text)){
+        console.log(RegExp.input);  //this has been a short summer
+        console.log(RegExp.leftContext);  //this has been a
+        console.log(RegExp.rightContext);  //summer
+        console.log(RegExp.lastMatch);     //short
+        console.log(RegExp.lastParen);    //s
+        console.log(RegExp.multiline);    //false
+    }
+
+匹配任何一个字符后跟hort，且把第一个字符放在了一个捕获组中
+
+对应的短属性名
+
+    alert(RegExp["$`"]);
+
+9个用于存储捕获组的构造函数属性，分别用于存储第一，第二。。第九个匹配的捕获组
+
+    var text = "this has been a short sumer";
+    var pattern = /(..)or(.)/g;
+    if(pattern.test(text)){
+    alert(RegExp.$1);   //sh
+    alert(RegExp.$2);   //t
+    }
+
+
+----------
+### Function ###
+
+声明函数的两种方法
+
+//函数声明
+
+    function sum(num1,num2){
+    	return num1+num2;
+    }
+
+//函数表达式
+
+    var sum = function(num1,num2){
+    return num1+num2;
+    } ;
+函数名是指针
+
+声明两个同名函数，后者会覆盖前者
+
+解析器在执行环境加载数据时，会率先读取函数声明，并使其在执行任何代码之前可用
+
+arguments.callee属性是一个指针，指向拥有这个arguments对象的函数
+
+    function factory(num){
+    if(num <= 1){
+    return 1;
+    }else{
+    return num*factory(num-1);
+    }
+    }
+
+当var truefactory = factory;时原函数将无法调用
+
+可以通过callee属性来取消函数名的耦合状态
+
+    function factory(num){
+    if(num <= 1){
+    return 1;
+    }else{
+    return num*arguments.callee(num-1);
+    }
+    }
+
+当在网页的全局作用域中调用函数时，this对象引用的就是window
+
+length属性表示函数希望接收的命名参数的个数
+
+    function sayname(){
+    	alsert("s");
+    }
+    
+    alert(sayname.length);   //0
+
+
+----------
+### 基本包装类型概述 ###
+ 实际上,每当读取一个基本类型值的时候,后台就会创建一个对应的基本包装类型的对象,从而能够调用一些方法来操作这些数据
+
+    var box = 'Mr.Lee';  // 定义一个String字符串;  
+    var box2 = box.substring(2);　// 截掉字符串前两位;
+    console.log(box2);  //.Lee;
+    // 变量box是一个字符串String类型,而box.substring(2)又说明它是一个对象(只有对象才会调用方法);
+    console.log('Mr.Lee'.substring(3));  // 直接通过字符串值来调用方法=>Lee;
+
+引用类型和基本包装类型的主要区别就是对象的生存期;
+自动创建的基本包装类型的对象,则只存在于一行代码的执行瞬间,然后立即被销毁;
+
+字面量写法
+
+    var box = 'Mr.Lee'; // 字面量;
+    box.name = 'Lee';  // 无效属性;
+    box.age = function(){// 无效方法;
+      return 100;
+    };
+    console.log(box.substring(3));// =>Lee;
+    console.log(typeof box);   // =>string;
+    console.log(box.name);// =>undefined;
+    console.lgo(box.age());   // =>错误;这意味着我们不能在运行时为基本类型值添加属性和方法;
+
+new运算符写法
+
+    var box = new String('Mr.Lee');
+    box.name = 'Lee';
+    box.age = function(){
+      return 100;
+    };
+    console.log(box.substring(3));// =>Lee;
+    console.log(typeof box);  　// =>object;
+    console.log(box.name);// =>Lee;
+    console.lgo(box.age());// =>100;
+
+### Number类型 ###
+Number对象的方法
+
+ toString()           将数值转化为字符串,并且可以转换进制;
+
+ toLocaleString()     根据本地数字格式转换字符串;
+
+ toFixed()            将数字保留小数点后指定位数并转化为字
+符串;
+
+ toExponential()      将数字以指数形式表示;
+
+ toPrecision()        指数形式或点形式表示数字;指定以几位数表示
+    
+    var numberobject = new Number(10);
+    var numbervalue = 10;
+    alert(typeOf numberpbject);   //object
+    alert(typeOf numbervalue);//number
+
+number对象是number的实例，而基本类型的数值不是
+
+### string类型 ###
+字符方法
+
+charAt()以单字符字符串的形式返回给定位置的那个字符
+
+charCodeAt()返回字符编码
+
+    var stringvalue = "hello world";
+    alert(stringvalue.charAt(1));  //e
+    
+    alert(stringvalue.charCodeAt(1));  //101 
+
+字符串操作方法
+
+concat() 用于将一个或多个字符串拼接起来；返回新的字符串
+实际操作中更多用+操作符，比较简单易行
+
+    var stringvalue = "hello";
+    var result = stringvalue.concat("world");
+    
+    alert(result);   //"hello world"
+    alert(stringvalue);  //world
+
+基于字符串创建新字符串的方法
+slice（）；
+
+substr（）；  第二个参数指定返回的字符个数
+
+substring（）；
+
+他们都接收两个参数，即开始位置和结束位置（不包括结束位置），如果未指定第二个参数，则默认到字符串结尾（substr除外）
+
+    var stringvalue = "hello world";
+    alert(stringvalue.slice(3));   //lo world
+    alert(stringvalue.substring(3)); //lo world
+    alert(stringvalue.substr(3));  //lo world
+    alert(stringvalue.slice(3,7));  //lo w
+    alert(stringvalue.substring(3,7)); //lo w
+    alert(stringvalue.substr(3,7));  //lo worl
+
+当指定的参数为负值，slice会将传入的负值与字符串的长度相加。substr方法会将负的第一个参数加上字符串的长度，将第二个参数设为0，substring会将所有负值参数转换为0
+
+    var stringvalue = "hello world";
+    alert(stringvalue.slice(-3));  //rld
+    alert(stringvalue.substring(-3));  //hello world
+    alert(stringvalue.substr(-3));  //rld
+    alert(stringvalue.slice(3,-4));  //lo w
+    alert(stringvalue.substring(3,-4));  //hel
+    alert(stringvalue.substr(3,-4));  //空
+
+字符串位置方法
+
+indexOf  从头查找指定字符串，并返回第一次发现的位置
+lastIndexOf 相反
+
+他们都可以接收第二个可选参数，即从哪里开始查找
+lastIndexOf 会从指定位置向前搜索
+
+    var stringvalue = "sad  sadasd sdaserqqwe qw";
+    var positions = new Array();
+    var pos = stringvalue.indexOf("e");
+    
+    while(pos>-1){
+    positions.push(pos);
+    pos = stringvalue.indexOf("e",pos+1);
+    }
+    alert(positions);
+
+trim()方法会创建一个字符串的副本，并删除前置及后缀的所有空格，返回结果
+
+toLowerCase()方法会返回字符串的小写
+
+toUpperCase()方法会返回字符串的大写
+
+字符串的模式匹配方法
+
+match()方法本质上与调用RegExp的exec方法相同，match()方法只接收一个参数，要么是一个正则表达式，要么是一个RegExp对象
+
+    var text = "cat,bat,sat";
+    var pattern = /.at/;
+
+    var matches = text.match(pattern);
+    alert(matches.index);   //0
+    alert(matches[0]);  //cat
+    alert(pattern.lastIndex); //0
+
+search()方法会返回第一个匹配项的索引         //一千行合影
+
+    var text = "cat,bat,sat";
+    var pos= text.search(/.at/);
+    alert(pos);  //1
+
+replace()替换方法，它接收两个参数，第一个是一个RegExp对象或一个字符串。第二个参数可以是一个字符串或者一个函数，要想替换所有字符串，唯一的方法就是提供一个正则表达式，而且要指定全局标志（g），
+
+    var text = "cat,sat,bat";
+    var result = text.replace("at","ond");
+    alert(result);  //"cond,sat,bat"
+    
+    result = text.replace(/at/g,"ond");
+    alert(result);  //"cond sond band"
+    
+split()方法可以基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，他也可以接收第二个参数，指定数组的大小，确保返回的数组不会超过既定大小
+
+eval()方法会将传入的参数当作实际的javascript语句来解析，然后将执行结果插入到原位置
+
+math对象
+
+min()确定一组数值中的最小值
+
+max()确定一组数值中的最大值
+
+ceil()执行向上舍入
+
+floor()执行向下舍入
+
+round()执行标准舍入
+
+random()随机返回大于等于0小于1的一个随机数
+
+值 = Math.floor(Math.random()*可能值的总数+第一个可能的值)
+
+    var num = Math.floor(Math.random()*10+1);
+
+返回1到10的随机整数
+
+# p138 #
+
+
