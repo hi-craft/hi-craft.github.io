@@ -62,3 +62,6 @@ RSS: false
 
 # Plugins
 gems: [jekyll-paginate]
+
+baidu:
+    id:35e0a18c893cd42ab697b4a67c11df14
