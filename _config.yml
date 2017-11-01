@@ -16,7 +16,7 @@ nav:
 author: '庞云龙'
 nickname: 'hi-craft'
 bio: '2017 一路同行'
-avatar: '/assets/img/profile.png'
+avatar: 'http://oy6bua0oj.bkt.clouddn.com/profile.png'
 
 # Search
 search: true
