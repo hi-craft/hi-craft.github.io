@@ -3,8 +3,8 @@ layout: post
 title: 'JavaScript高级程序设计随记'
 subtitle: ''
 date: 2017-10-30
-categories: 知识
-cover: 'http://oy6bua0oj.bkt.clouddn.com/293261-106.jpg'
+categories: 笔记
+cover: 'http://oy6bua0oj.bkt.clouddn.com/46453-106.jpg'
 tags: JavaScript
 ---
 # js 高级 #
@@ -1036,6 +1036,151 @@ random()随机返回大于等于0小于1的一个随机数
 
 返回1到10的随机整数
 
-# p138 #
+JavaScript中定义了两种不同的属性
 
+数据属性和访问器属性
 
+数据属性一般用于存储数据数值，而访问器属性一般进行get/set操作，不能直接存储数据数值
+
+在ES5中，我们为了描述属性(property)的各种特征，定义了特性(attribute)。在JavaScript中不能直接访问特性，我们把它放在两对方括号中，例如[[Enumerable]]
+
+•数据属性
+
+数据属性主要有四个特性描述其行为
+
+1.[[Configurable]]：默认为true。表示能否通过delete删除属性从而重新定义属性，能否修改属性特性，或者能否把属性修改为访问器属性
+
+2.[[Enumerable]]：默认为true。表示能否通过for-in循环返回属性
+
+3.[[Writable]]：默认为true。表示能否修改属性的值
+
+4.[[Value]]：默认值为undefined。表示包含属性的数据值。读写属性值都从这个位置进行
+
+如果想要修改属性默认的特性，可以使用ES5提供的Object.defineProperty()方法，这个方法接收三个参数：属性所在对象、属性的名字和一个描述符对象。描述符对象只能包含上述四个特性的一个或多个
+
+    var person = {};
+    Object.defineProperty(person,"name",{
+    	writable:false,
+    	value:"Nicholas"
+    });
+    alert(person.name); //"Nicholas"
+    person.name = "Greg"; 
+    alert(person.name);  //"Nicholas"
+
+当调用Object.defineProperty()把除writable之外的特性修改回true，就会报错
+
+    var person = { 
+      name: "Scott"
+    } 
+    Object.defineProperty(person,"name",{ 
+      configurable:false; 
+    }) 
+     
+    Object.defineProperty(person,"name",{ 
+      configurable:true;  //此处会抛出错误 
+    }) 
+
+•访问器属性
+
+访问器属性不包含数据值。它包含一对getter和setter函数。当读取访问器属性时，会调用getter函数并返回有效值；当写入访问器属性时，会调用setter函数并传入新值，setter函数负责处理数据
+
+该属性有四个特性：
+
+1.[[Configurable]]：默认为true。表示能否通过delete删除属性从而重新定义属性，能否修改属性特性，或者能否把属性修改为访问器属性
+
+2.[[Enumerable]]：默认为true。表示能否通过for-in循环返回属性
+
+3.[[Get]]：读取属性时调用的函数，默认为undefined
+
+4.[[Set]]：写入属性时调用的函数，默认为undefined
+
+访问器属性不能直接定义，必须通过Object.defineProperty()函数定义
+
+    var book = {
+    _year:2004,
+    edition:1
+    };
+    Object.defineProperty(book,"year",{
+    get:function(){
+    return this._year;
+    },
+    set: function(newValue){
+    if(newValue>2004){
+    this._year = newValue;
+    this.edition += newValue -2004;
+    }
+    }
+    });
+    
+    book.year = 2005;
+    alert(book.edition);  //2
+
+以上代码创建了一个book对象，并给它定义了两个默认的属性。getter函数返回-year的值，setter函数通过计算来确定正确的版本，因此把year属性修改为2005会导致_year变成2005，edition变为2
+
+Object.defineProperties(),利用这个方法可以通过描述符一次性定义多个属性，该函数接收两个参数，属性所在的对象以及需要修改的属性及其描述符对象组成的对象
+
+    var book = {};
+    Object.defineProperties(book,{
+    	_year:{
+    		writable:true,
+    		value:2004},
+   		edition:{
+    		writion:true,
+    		value:1},
+    	year:{
+    		get:function(){
+    		return this._year;
+    	},
+    	set: function(newValue){
+    		if(newValue>2004){
+    			this._year = newValue;
+    			this.edition += newValue -2004;
+    	}
+    }
+    }
+    
+    });
+
+读取属性的方法
+
+Object.getOwnPropertyDescriptior() 
+
+接受两个参数,属性所在的对象和要读取其描述符的属性名称,返回值是一个对象
+
+如果是访问其属性 这个对象的属性有configurable,enumerable,get,set
+
+如果是数据属性 这个对象的属性有configurable,enumerable,writable,value
+
+    var book ={};
+    
+    Object.defineProperties(book,{
+    	_year:{
+    		value:2004	
+    	},
+    	edition:{
+    		value:1
+    	},
+    	year:{
+    		get:function(){
+    			return this._year;
+    		},
+    		set:function(newValue){
+    			if(newVlaue>2004){
+    				this._year = newValue;
+    				this.edition += newValue - 2004;
+    			}
+    		}
+    	}
+    })
+    
+    var descriptor = Object.getOwnPropertyDescriptor(book,"_year");
+    
+    alert(descriptor.value);   //2004
+    alert(description.configurable); //false
+    alert(typeOf descriptor.get);  //undefined
+    var descriptor = Object.getOwnPropertyDescriptor(book,"year");
+    alert(descriptor.value);  //undefined
+    alert(descriptor.enumerable); //false
+    alert(typeOf descriptor.get);  //function
+
+# p145 #
