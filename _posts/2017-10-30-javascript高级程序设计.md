@@ -1,4 +1,4 @@
----
+<button type="button">open</button>---
 layout: post
 title: 'JavaScript高级程序设计随记'
 subtitle: ''
@@ -1183,4 +1183,335 @@ Object.getOwnPropertyDescriptior()
     alert(descriptor.enumerable); //false
     alert(typeOf descriptor.get);  //function
 
-# p145 #
+
+----------
+### 工厂模式 ###
+这种模式抽象了创建具体对象的过程,用函数来封装以特定接口创建对象的细节
+
+    function creatPerson(name,age,job){
+    	var o = new Object();
+    	o.name = name;
+    	o.age = age;
+    	o.job = job;
+    	o.sayName =  function(){
+    	alert(this.name)
+    	};
+    	return o;
+    }
+    
+    var person1 = creatPerson("n",29,"software");
+
+但是工厂模式无法识别对象(即怎么知道一个对象的类型)
+
+### 构造函数 ###
+
+    function Person(name,age,job){
+    	this.name =name;
+    	this.age = age;
+    	this.job = job;
+    	this.sayName = function(){
+    		alert(this.name);
+    	};
+    }
+    var person1 = new Person("sd",29,"softethe");
+
+通过构造函数可以创建自定义对象类型的属性和方法
+
+构造函数过程:
+
+1.创建一个新对象;
+2.将构造函数的作用域赋给新对象(因此this就指向了这个新对象);
+3.执行构造函数中的代码
+4.返回新对象
+
+person1,person2保存着person的不同实例,这两个函数都有一个constructor(构造函数)属性,该属性指向person
+	
+	alert(person1.constructor ==person);//true
+
+	alert(person1 instanceof Object);//true
+
+	alert(person1 instanceof Person); //true
+
+创建自定义的构造函数意味着将来可以把它的实例标识为一种特定的类型
+
+构造函数不加new,this对象会被指向global对象(在浏览器中就是window对象)
+
+每个person实例都会包含一个不同的function实例,以这种方式创建函数,会导致不同的作用域链和标识符解析,所以有了原型模式的产生
+
+### 原型模式 ###
+
+创建的每个函数都有一个prototype属性,这个属性是一个指针,指向一个对象,而这个对象的用途是包含可以有特定的所有实例共享的属性和方法
+
+例:
+
+    function Person(){
+    }
+    
+    Person.prototype.name = "sd";
+    Person.prototype.age = 29;
+    Person.prototype.job = "sofether";
+    Person.prototype.sayName = function(){
+    	alert(this.name);
+    };
+    
+    var person1 = new Person();
+    var person2 = new Person();
+    
+    alert(person1.sayName == person2.sayName);//true
+
+理解原型对象 p148
+
+当创建一个新函数时,就会为该函数创建一个prototype属性,这个是姓指向函数的原型对象,而原型对象则会获得一个constructor(构造函数)属性,这个属性是一个指向函数的指针
+
+当函数创建了一个实例后,会包含一个内部属性,该属性指向了构造函数的原型对象,也就是说,实例与构造函数并没有直接的关系
+
+当向实例请求一个属性值的时候,会执行一次搜索,如果实例中具有给定名字的属性,则会返回该属性的值,否则会在该实例的原型中查找具有给定名字的属性
+
+hasOwnProperty()方法可以检测一个属性是存在于实例中,还是原型中,只有当存在于实例中,会返回true,in操作符只要可以访问就会返回true,所以当in操作符返回true,hasOwnProperty()返回false,就可以确定属性是原型中的属性
+
+在ECMAscript5中Object.keys();方法,可以返回包含所有可枚举属性的字符串数组(原型中的属性不算);
+
+    function Person(){}
+    Person.prototype.name = "nic";
+    Person.prototype.age = 29;
+    Person.prototype.sayname = function(){
+    alert(this.name);
+    };
+    var p1 = new Person();
+    p1.name = "rob";
+    p1.age = 31;
+    var p1keys = Object.keys(p1);
+    console.log(p1keys);//name,age
+
+### 原型语法的简化写法 ###
+
+    function Person(){
+    }
+    Person.prototype = {
+    name:"sd",
+    age:21,
+    sayName:function(){
+    alert(this.name);
+    }
+    };
+
+这样写之后constructor属性不再指向Person,而指向Object,因为每创建一个函数,同时会创建他的prototype对象,这个对象也会自动获得constructor属性
+
+如果有特别的需要,可以在原型函数中通过指定constructor属性
+
+### 原型模式和构造模式混合使用 ###
+
+    function Person(name,age){
+    	this.name = name;
+    	this.age = age;
+    	this.friends = ["sd","cs"];
+    }
+    Person.prototype = {
+    	constructor:Person,
+    	sayName : function(){
+    	alert(this.name);
+    	}
+    }
+    var person1 = new Person('qq',21);
+    var person2 = new Person('ww',20);
+    person1.friends.push('van');
+    alert(person1.friends);  //sd,cs,van
+    alert(person2.friends);  //sd,cs
+
+p160
+
+### 稳妥构造函数模式 ###
+
+    function Person(name,age){
+    	//创建要返回的对象
+    	var o = new Object();
+    	//定义私有变量和函数
+    	//添加方法
+    	o.sayName = function(){
+    		alert(name);	
+    	}
+    	return o;
+    }
+    
+    var person1 = Person("sd",21);
+    person1.sayName();//"sd"
+
+在一些安全环境中会禁用this和new,或者防止数据被其他应用程序改动时使用(Mashup)
+
+这种模式创建的对象,除了使用sayName()方法外,没有其他方法可以访问其数据成员
+
+### 原型链 ###
+
+每个构造函数都有一个原型对象,原型对象包含一个指向构造函数的指针,而实例包含一个指向原型对象的内部指针
+
+如果原型对象等于另一个对象的实例,则这个原型对象会包含一个指向另一个原型的内部指针,相应的,另一个原型中也包含着一个指向另一个构造函数的指针.层层递进,就是原型链的基本概念
+
+    //定义方法
+    	function Supertype(){
+    	this.property = true;
+    }
+    //定义原型方法
+    	Supertype.prototype.getSuperValue = function(){
+    	return this.property;
+    };
+    //定义方法
+    	function Subtype(){
+    	this.subproperty = false;
+    }
+    //将新函数的原型指向原函数的实例,同时继承supertype
+    	Subtype.prototype = new Supertype();
+    //定义新函数原型方法
+    	Subtype.prototype.getSubValue = function(){
+    	return this.subproperty;
+    };
+    //新函数创建实例
+    	var instance = new Subtype();
+    	alert(instance.getSuperValue()); //true
+
+以上函数将subtype默认提供的原型,重写为supertype的实例,新原型不仅作为一个supertype的实例所拥有的全部属性和方法,而且其内部还有一个指针,指向supertype的原型,最终结果就是:instance指向subtype的原型,subtype的原型又指向supertype的原型,此时instance的constructor指向supertype,所以在查询属性名的时候,会先在实例中查找,然后在subtype的原型中查找,然后在supertype的原型中查找,在查找不到属性和方法时,搜索过程会前行到原型链末端
+
+所有函数的默认原型都是Object的实例,因此默认原型会包含一个内部指针,指向Object.prototype
+
+在通过原型链实现继承时,不能使用对象字面量创建原型方法, 因为重写后的原型对象,不再指向被继承的对象,而是指向Object的原型对象
+
+### 借用构造函数 ###
+
+    function supertype (){
+    	this.colors = ["red",'blue,','green'];
+    }
+    function subtype(){
+    	supertyep.call(this);
+    }
+    var instance1 = new subtype();
+    instance1.colors.push('black');
+    alert(instance1.colors);//red,blue,green,black
+    var instance2 = new subtype();
+    alert(instance2.colors);//red,blue,green
+
+call方法借调了超类型的构造函数,通过调用call方法,可以在新创建的subtype实例的环境下调用了supertype构造函数
+
+借用构造函数也可以传递参数
+
+    function supertype(name){
+    	this.name = name;
+    }
+    function subtype(){
+    	supertype.call(this,"sd");
+    	this.age = 29;
+    }
+    var instance = new subtype();
+    alert(instance.name);//sd
+    alert(instance.age); //29
+
+### 组合继承 ###
+
+    function supertype(name){
+    	this.name = name ;
+    	this.colors = ["red","blue","green"];
+    }
+    supertype.prototype.sayname = function(){
+    alert(this.name);
+    };
+    function subtype(name,age){
+    	supertype.call(this,name);
+    	this.age = age;
+    }
+    subtype.prototype = new supertype();
+    subtype.constructor = subtype;
+    subtype.prototype.sayage = function(){
+    	alert(this.age);
+    };
+    var instance1 = new subtype("sd",29);
+    instance1.colors.push("as");
+    alert(instance1.colors); //red,blue,green,as
+    instance1.sayname(); //sd
+    instance1.sayage(); //29
+    var instance2 = new subtype("qq",21);
+    alert(instance2.colors); //red,blue,green
+    instance2.sayname(); //qq
+    instance2.sayage(); //21
+
+supertype函数定义了两个属性:name,colors它的原型定义了sayname方法,subtype构造函数在调用supertype构造函数时传入了name参数,又定义了自己的age属性,然后将supertype的实例赋值给subtype的原型,又在该原型上定义了方法sayage,这样就可以让两个不同的subtype实例即分别拥有自己的属性,又可以使用相同的方法
+
+原型式继承:
+
+寄生式继承:
+
+寄生组合式继承:
+
+都神马玩意~~~~
+
+## 第七章:函数表达式 ##
+
+函数声明提升:在执行代码之前会先读取函数声明,这意味着可以把函数声明放在调用它的语句后面,但是函数声明和函数表达式有区别,此规则在函数表达式下不适用
+
+函数声明
+
+    function s(){
+    //yoooooo
+    }
+
+函数表达式
+
+    var s = function(){
+    //yoooooo
+    }
+
+### 递归 ###
+
+递归函数是在一个函数通过名字调用自身的情况下构成的
+
+    function factory(num){
+    	if(num<=1){
+    		return 1;
+    	}else{
+    		return num* factory(num-1);
+    	}
+    }
+
+但是加入以下的代码会导致出错
+    
+    var sd = factory;
+    factory =null;
+    console.log(sd(5));
+
+在不确定函数名字或匿名函数的时候可以使用arguments.callee
+,他是一个指向正在执行的函数的指针,在严格模式下无法使用
+
+    function factory(num){
+    	if(num<=1){
+    		return 1;
+    	}else{
+    		return num* arguments.callee(num-1);
+    	}
+    }
+
+以上的效果也可以通过使用命名函数表达式来实现同样的效果,在严格模式下同样可用
+
+var factory = (function f(num){
+	if(num<=1){
+		return 1;
+	}else{
+		return num*f(num-1);
+	}
+});
+
+### 闭包 ###
+
+创建闭包的常见方式,就是在一个函数内部创建另一个函数
+
+在函数被调用时,会创建一个执行环境及相应的作用域链,在作用域链中外部函数的活动对象始终处于第二位,直到最后的全局执行环境,作用域链是一个指向变量对象的指针列表
+
+内部函数会将外部函数的活动对象添加到它的作用域链中,普通函数中定义的局部变量,会在调用后销毁,但是闭包不会,因为在外部函数执行完毕后,其内部函数的作用域链仍在引用这个活动对象,在外部函数返回后,它的作用域链被初始化为其函数内的活动对象和全局变量对象,其执行环境的作用域链会被销毁,但是他的活动对象仍会留在内存中,直到匿名函数被销毁后,其活动对象才会被销毁
+    
+    //创建对象
+    var com = creat("name");
+    //调用函数
+    var result = com({name:"nic"},{name:"greg"});
+    //解除对匿名函数的引用(以便释放内存)
+    com =null;
+
+闭包与变量,关于this对象 p182
+
+匿名函数的执行环境具有全局性
+
