@@ -1,4 +1,4 @@
-<button type="button">open</button>---
+---
 layout: post
 title: 'JavaScript高级程序设计随记'
 subtitle: ''
