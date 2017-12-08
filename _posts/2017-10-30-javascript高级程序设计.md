@@ -1511,7 +1511,56 @@ var factory = (function f(num){
     //解除对匿名函数的引用(以便释放内存)
     com =null;
 
-闭包与变量,关于this对象 p182
+关于this对象
 
-匿名函数的执行环境具有全局性
+    
+匿名函数的执行环境具有全局性,在全局函数中,this等于window
 
+     var name = "the window";
+     var object = {
+    name :"my object",
+    getname :function(){
+    return function(){
+    return this.name;
+    };
+    }
+     };
+     console.log(object.getname()());
+
+
+上面这个例子中,在每个函数被调用的时候都会自动取得两个特殊变量,this和arguments 内部函数在搜索这两个变量的时候,只会搜索到其活动对象为止,(且匿名函数的执行环境具有全局性)因此永远不可能直接访问外部函数中的这两个变量
+
+         var name = "the window";
+         var object = {
+            name :"my object",
+            getname :function(){
+                var  that =this;
+                return function(){
+                    return that.name;
+                };
+            }
+         };
+         console.log(object.getname()());
+
+在定义匿名函数之前,将this的对象赋值给一个变量,即使在函数返回后,that也引用着object
+
+### 内存泄漏 ###
+
+如果闭包的作用域链中保存着一个html元素,那么意味着钙元素将无法被销毁,也就是无法正常释放内存,
+
+    function ass(){
+    	var element = document.getElementById('someelement');
+    	element.onclick = function(){
+    		alert(element.id);
+    	}
+    }
+
+ 由于匿名函数保存了一个对ass()的活动对象的引用,因此导致无法减少element的引用数,只要匿名函数存在,element的引用数至少也是1,因此他占用的内存永远也不会被回收
+
+    function ass(){
+    	var element = document.getElementById('someelement');
+    	var id = element.id;
+    	element.onclick = function(){
+    		alert(id);
+    	}
+    }
