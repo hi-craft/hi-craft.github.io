@@ -6,7 +6,7 @@ url: 'https://hi-craft.github.io' # your host
 
 # if you don't need baseurl, you should leave this value blank.
 baseurl: ''
-
+permalink: pretty
 # Navigation links
 nav:
   home: '/'
