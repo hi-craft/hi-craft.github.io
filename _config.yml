@@ -1,5 +1,5 @@
 # Site settings 配置站点
-title: '2017 一路同行'
+title: '我还在'
 description: 'Winter is coming'
 keyword: 'HTML5, CSS3, javascript'
 url: 'https://hi-craft.github.io' # your host
@@ -15,7 +15,7 @@ nav:
 # Author 配置博主信息
 author: '庞云龙'
 nickname: 'hi-craft'
-bio: '2017 一路同行'
+bio: '相信时光不会辜负每一个努力的人'
 avatar: 'http://oy6bua0oj.bkt.clouddn.com/profile.png'
 
 # Search
