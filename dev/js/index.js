@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log('Everething OK')
+    console.log('Everething Done')
         /**
          * Responsive Navigation
          */
