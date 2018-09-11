@@ -1,5 +1,5 @@
 # Site settings 配置站点
-title: '我还在'
+title: 'My personal blog'
 description: 'Winter is coming'
 keyword: 'HTML5, CSS3, javascript'
 url: 'https://hi-craft.github.io' # your host
@@ -20,7 +20,8 @@ avatar: 'http://oy6bua0oj.bkt.clouddn.com/profile.png'
 
 # Search
 search: true
-
+# Music
+msuic: true
 # Night mode
 nightMode: true
 

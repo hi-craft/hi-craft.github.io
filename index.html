@@ -7,7 +7,7 @@ header-img: http://oy6bua0oj.bkt.clouddn.com/%E6%96%87%E5%AD%97%20-%2012.jpg
 
 {% include header.html %}
 
-<div class="g-banner home-banner" >
+<div class="g-banner home-banner">
     <h2>{{ page.home-title }}</h2>
     <h3>{{ page.description }}</h3>
     {% if page.header-img %}
@@ -18,38 +18,38 @@ header-img: http://oy6bua0oj.bkt.clouddn.com/%E6%96%87%E5%AD%97%20-%2012.jpg
 <main class="g-container home-content">
     <div class="article-list">
         {% for post in paginator.posts %}
-            <article class="article-item">
-                {% if post.cover %}
-                <div class="post-cover">
-                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
-                    <img src="{{ post.cover }}" alt="">
-                </div>
+        <article class="article-item">
+            {% if post.cover %}
+            <div class="post-cover">
+                <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
+                <img src="{{ post.cover }}" alt="">
+            </div>
+            {% endif %}
+            <section class="post-preview">
+                <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
+                <h2 class="post-title">{{ post.title }}</h2>
+                {% if post.subtitle %}
+                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
                 {% endif %}
-                <section class="post-preview">
-                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
-                    <h2 class="post-title">{{ post.title }}</h2>
-                    {% if post.subtitle %}
-                    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                {% if post.subtitle.size==0 or post.subtitle==nil %}
+                <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 126}}</p>
+                {% endif %}
+            </section>
+            <footer class="post-meta">
+                <div class="post-tags">
+                    {% if post.tags.size > 0 %}
+                    {% for tag in post.tags %}
+                    <a href={{ "tags.html#" | append: tag | pretend: site.baseurl}} class="post-tag">{{ tag }}</a>
+                    {% endfor %}
                     {% endif %}
-                    {% if post.subtitle.size==0 or post.subtitle==nil %}
-                    <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 126}}</p>
-                    {% endif %}
-                </section>
-                <footer class="post-meta">
-                    <div class="post-tags">
-                        {% if post.tags.size > 0 %}
-                            {% for tag in post.tags  %}
-                            <a href={{ "tags.html#" | append: tag | pretend: site.baseurl}} class="post-tag">{{ tag }}</a>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <time class="post-date" datetime="{{ post.date | date:"%y-%m-%d" }}">{{ post.date | date_to_string }}</time>
-                </footer>
-            </article>
+                </div>
+                <time class="post-date" datetime="{{ post.date | date:"%y-%m-%d" }}">{{ post.date | date_to_string }}</time>
+            </footer>
+        </article>
         {% endfor %}
 
         {% if paginator.total_pages > 1 %}
-            {% include pageNav.html %}
+        {% include pageNav.html %}
         {% endif %}
 
     </div>
@@ -80,10 +80,10 @@ header-img: http://oy6bua0oj.bkt.clouddn.com/%E6%96%87%E5%AD%97%20-%2012.jpg
             {% if site.recommend-tags and site.tags.size>0 %}
             <section class="tags-card">
                 {% for tag in site.tags %}
-                    {% if forloop.index > site.recommend-condition-size %}
-                        {% break %}
-                    {% endif %}
-                    <a href="{{ "tags.html#" | append: tag[0] | prepend: site.baseurl }}" class="tag">{{ tag[0]}}</a>
+                {% if forloop.index > site.recommend-condition-size %}
+                {% break %}
+                {% endif %}
+                <a href="{{ "tags.html#" | append: tag[0] | prepend: site.baseurl }}" class="tag">{{ tag[0]}}</a>
                 {% endfor %}
             </section>
             {% endif %}
@@ -95,6 +95,9 @@ header-img: http://oy6bua0oj.bkt.clouddn.com/%E6%96%87%E5%AD%97%20-%2012.jpg
             <i class="iconfont icon-search"></i>
             <div class="search_result"></div>
         </div>
+        {% endif %}
+        {% if site.music %}
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=535292985&auto=1&height=66"></iframe>
         {% endif %}
 
     </aside>
