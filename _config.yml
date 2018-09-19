@@ -23,7 +23,7 @@ avatar: 'http://oy6bua0oj.bkt.clouddn.com/profile.png'
 # Search
 search: true
 # Music
-music: true
+music: false
 # Night mode
 nightMode: true
 
