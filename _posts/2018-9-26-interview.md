@@ -2,7 +2,7 @@
 layout: post
 title: 'Web知识点整理'
 date: 2018-9-26
-subtitle:'web'
+subtitle: 'web'
 categories: 笔记
 cover: 'http://p7ik6bm59.bkt.clouddn.com/First%20Sight.jpg'
 tags: note
