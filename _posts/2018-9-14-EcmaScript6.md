@@ -2,7 +2,7 @@
 layout: post
 title: 'ECMAScript6'
 date: 2018-9-14
-subtitle:'ES6基础'
+subtitle: 'ES6基础'
 categories: 笔记
 cover: 'http://pbfh16fiv.bkt.clouddn.com/es6.png'
 tags: ECMAScript6

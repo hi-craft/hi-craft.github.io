@@ -52,7 +52,7 @@ dom.getBoundingClientRect().width/height //返回元素的大小及其相对于�
 * overflow 值不为 `visible` 的块元素
 * display为inline-block, table-cell, table-caption, flex, inline-flex
 
-###　DOM
+### DOM
 
 #### DOM事件级别
 
@@ -66,7 +66,7 @@ DOM2 element.addEventListener("keyup",function(){},flase)
 
 **事件捕获和事件冒泡**
 
-####　DOM事件流
+#### DOM事件流
 
 **事件捕获＝>目标节点=>事件冒泡**
 
@@ -171,7 +171,7 @@ HTTP报文的组成部分
 * GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息
 * GET参数通过URL传递，POST放在Reauest body中   记
 
-####　HTTP状态码
+#### HTTP状态码
 
 * 1xx : 提示信息－表示请求已接收，继续处理
 * 2xx： 成功-表示请求已被成功接收
@@ -373,7 +373,7 @@ Child.prototype.constructor = Child;
 
 这样在子类构造函数的原型对象与父类构造函数的原型对象构建了一个中间层，将其隔离的目的是为了手动设置子类构造函数的原型对象的constructor而不影响父类构造函数的原型对象的constructor，上面的第二种写法如果直接指定子类的构造函数的原型对象的constructor，那么父类的构造函数的原型对象的constructor也会被改变
 
-###　通信
+### 通信
 
 什么是同源策略及限制，前后端如何通信，如何创建Ajax，跨域通信的几种方式
 
@@ -648,7 +648,7 @@ Event Loop就是当同步任务队列读取后，开始读取异步任务队列�
     * 2)perfofmance.getEntries()（返回已经成功加载资源数组，可以通过比较需要加载的资源数组来得到那些资源没有被正确加载） 
     * 3)Error事件捕获，可以通过addEventListener的方式来绑定Error事件，并且设置为True（捕获方式接收事件）
 
-* #####　上报错误的基本原理
+* ##### 上报错误的基本原理
 
   * 采用Ajax通信的方式上报
 
