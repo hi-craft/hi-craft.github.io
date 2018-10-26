@@ -2,11 +2,12 @@
 layout: post
 title: 'ECMAScript6'
 date: 2018-9-14
+subtitle:'ES6基础'
 categories: 笔记
 cover: 'http://pbfh16fiv.bkt.clouddn.com/es6.png'
 tags: ECMAScript6
 ---
-#ES6 基础
+# ES6 基础
 
 **ES6作用于严格模式下,严格模式主要有以下限制**
 
@@ -42,7 +43,7 @@ tags: ECMAScript6
 
 声明常量不可重新赋值
 
-##箭头函数
+## 箭头函数
 
 ES6允许使用箭头（=>）定义函数
 
@@ -95,13 +96,13 @@ let string = `${a()}` //do something
 let strings = `${3>2?yes:false}` //yes
 ```
 
-##**变量的解构赋值**
+## **变量的解构赋值**
 
 ES6中按照一定模式从数组和对象中提取值，然后对变量进行赋值的操作叫做解构赋值
 
 解构赋值可以用于数组，对象，字符串，数值和布尔值，函数参数
 
-###数组
+### 数组
 
 数组的解构赋值属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予相应的值
 
@@ -251,7 +252,7 @@ move(); //[0,0]
 
 ### 解构赋值的用途
 
-####交换变量的值
+#### 交换变量的值
 
 ```javascript
 let x = 1;
@@ -259,7 +260,7 @@ let y = 2;
 [x,y] = [y,x];
 ```
 
-####从函数返回多个值
+#### 从函数返回多个值
 
 ```javascript
 //返回一个数组
@@ -270,7 +271,7 @@ let example = ()=>{foo:1,bar:2};
 let {foo,bar} = example();
 ```
 
-####函数参数的定义
+#### 函数参数的定义
 
 可以很方便的将一组参数与变量名对应起来
 
@@ -283,7 +284,7 @@ let f = ({x,y,z})=>{ //do something};
 f({z:3,y:2,x:1});
 ```
 
-####提取JSON数据
+#### 提取JSON数据
 
 ```javascript
 let jsondata = {id:42,status:'ok',data:[867,1]};
@@ -822,7 +823,7 @@ var new_array = arr.filter(callback(element[, index[, array]])[, thisArg])
 
 `callback`
 
-​	用来测试数组的每个元素的函数。调用时使用参数 (element, index, array)。
+	用来测试数组的每个元素的函数。调用时使用参数 (element, index, array)。
 	返回true表示保留该元素（通过测试），false则不保留。它接受三个参数：
 
 - **element**
@@ -839,7 +840,7 @@ var new_array = arr.filter(callback(element[, index[, array]])[, thisArg])
 
 `thisArg（可选）`
 
-​	可选。执行 `callback` 时的用于 `this` 的值。
+	可选。执行 `callback` 时的用于 `this` 的值。
 
 这个方法会返回一个新的通过测试的元素的集合的数组，如果没有通过测试则返回空数组
 
