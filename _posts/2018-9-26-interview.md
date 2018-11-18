@@ -2,7 +2,6 @@
 layout: post
 title: 'Web知识点整理'
 date: 2018-9-26
-subtitle: 'web'
 categories: 笔记
 cover: 'http://p7ik6bm59.bkt.clouddn.com/First%20Sight.jpg'
 tags: note
@@ -52,7 +51,7 @@ dom.getBoundingClientRect().width/height //返回元素的大小及其相对于�
 * overflow 值不为 `visible` 的块元素
 * display为inline-block, table-cell, table-caption, flex, inline-flex
 
-### DOM
+###　DOM
 
 #### DOM事件级别
 
@@ -66,7 +65,7 @@ DOM2 element.addEventListener("keyup",function(){},flase)
 
 **事件捕获和事件冒泡**
 
-#### DOM事件流
+####　DOM事件流
 
 **事件捕获＝>目标节点=>事件冒泡**
 
@@ -102,7 +101,7 @@ let selfEvent = new Event('self',{
     });
 let doc = document.querySelector('.layout .left');
 doc.addEventListener('self', () => {
-	alert('This is Self Event');
+  alert('This is Self Event');
 })
 doc.dispatchEvent(selfEvent)
 ```
@@ -171,7 +170,7 @@ HTTP报文的组成部分
 * GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息
 * GET参数通过URL传递，POST放在Reauest body中   记
 
-#### HTTP状态码
+####　HTTP状态码
 
 * 1xx : 提示信息－表示请求已接收，继续处理
 * 2xx： 成功-表示请求已被成功接收
@@ -279,7 +278,7 @@ function Parent1(){
     this.name = 'parent1';
 }
 function Child1(){
- 	Parent1.call(this); //将父级构造函数的This指向子构造函数的实例
+  Parent1.call(this); //将父级构造函数的This指向子构造函数的实例
     this.type = 'child1';
 }
 ```
@@ -288,11 +287,11 @@ function Child1(){
 
 ```javascript
 function Parent(){
-	this.name = 'parent';
+  this.name = 'parent';
     this.arr = [1,2,3]
 }
 function Child(){
-	this.type = 'child';
+  this.type = 'child';
 }
 Child.prototype = new Parent();
 
@@ -360,12 +359,12 @@ o2.arr //[1,2,3,4]
 
 ```javascript
 function Parent() {
-	this.name = 'parent';
-	this.arr = [1, 2, 3]
+  this.name = 'parent';
+  this.arr = [1, 2, 3]
 }
 function Child() {
-	Parent.call(this);
-	this.type = 'child'
+  Parent.call(this);
+  this.type = 'child'
 }
 Child.prototype = Object.create(Parent.prototype);
 Child.prototype.constructor = Child;
@@ -373,7 +372,7 @@ Child.prototype.constructor = Child;
 
 这样在子类构造函数的原型对象与父类构造函数的原型对象构建了一个中间层，将其隔离的目的是为了手动设置子类构造函数的原型对象的constructor而不影响父类构造函数的原型对象的constructor，上面的第二种写法如果直接指定子类的构造函数的原型对象的constructor，那么父类的构造函数的原型对象的constructor也会被改变
 
-### 通信
+###　通信
 
 什么是同源策略及限制，前后端如何通信，如何创建Ajax，跨域通信的几种方式
 
@@ -483,7 +482,7 @@ JSONP只支持`GET`请求，CORS支持所有类型的HTTP请求。JSONP的优势
 
 跨站请求伪造(Cross-site request forgery)缩写CSRF
 
-![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_001.png)
+![](https://farm5.staticflickr.com/4823/45021378645_a7d07320ba_o.png)
 
 当用户注册并登录网站A后，网站A就会下放Cookie保存在浏览器中，用于下次登录。网站B会存在一个引诱链接，当用户点击后网站B会调用网站A的API接口，浏览器就会自动上传保存在浏览器中的Cookie，网站A通过验证后就会允许网站B的登录行为
 
@@ -510,7 +509,7 @@ CSRF利用网站的漏洞发起攻击，XSS则是通过直接注入js执行脚�
 
 ### 算法
 
-![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_002.png)
+![](https://farm5.staticflickr.com/4832/30994826027_2c20d9a75e_o.png)
 
 * 排序
   * [快速排序](https://segmentfault.com/a/1190000009426421)
@@ -531,12 +530,12 @@ CSRF利用网站的漏洞发起攻击，XSS则是通过直接注入js执行脚�
   * HTML4.01Strict 该DTD包含所有HTML元素和属性,但不包括展示性和弃用的元素（比如font）
   * HTML4.01 Transitional 该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）
 * 浏览器渲染过程
-  * ![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_003.png)
+  * ![](https://farm5.staticflickr.com/4809/45021378445_ce1252d292_o.png)
   * HTML通过HTML Parse转成DOM Tree Style Sheets通过CSS Parse转成Style Rules，他们之间通过整合形成Render Tree，同时浏览器生成Layout布局，确定元素位置，然后浏览器开始绘制，显示
-  * ![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_004.png)
-  * ![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_005.png)
-  * ![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_006.png)
-  * ![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_007.png)
+  * ![](https://farm5.staticflickr.com/4896/44117497750_c268c77261_o.png)
+  * ![](https://farm5.staticflickr.com/4810/30994825677_1b19f57919_o.png)
+  * ![](https://farm5.staticflickr.com/4869/30994825577_5322b90364_o.png)
+  * ![](https://farm5.staticflickr.com/4914/45021378175_beee00ef93_o.png)
 * 重排Reflow
   * 定义
     * dom结构中的各个元素都有自己的盒子（模型），这些都需要浏览器根据各种样式来计算并根据计算结果将元素放到它该出现的位置，这个过程称之为reflow
@@ -558,7 +557,7 @@ CSRF利用网站的漏洞发起攻击，XSS则是通过直接注入js执行脚�
 
 #### JS运行机制
 
-	JS单线程运行，也就是JS同时只能处理一个事件，SetTimeout得以通过异步的方式执行，是因为JS采用了任务队列的方式
+  JS单线程运行，也就是JS同时只能处理一个事件，SetTimeout得以通过异步的方式执行，是因为JS采用了任务队列的方式
 
 ```javascript
 console.log(1);
@@ -593,7 +592,7 @@ for(var i=0;i<4;i++){
 
 #### 任务队列和Event Loop
 
-![](http://p7ik6bm59.bkt.clouddn.com/%E9%80%89%E5%8C%BA_008.png)
+![](https://farm5.staticflickr.com/4816/30994825287_806c199fa3_o.png)
 
 Event Loop就是当同步任务队列读取后，开始读取异步任务队列，当全部执行完毕后，重新开始读取同步任务队列。
 
@@ -648,7 +647,7 @@ Event Loop就是当同步任务队列读取后，开始读取异步任务队列�
     * 2)perfofmance.getEntries()（返回已经成功加载资源数组，可以通过比较需要加载的资源数组来得到那些资源没有被正确加载） 
     * 3)Error事件捕获，可以通过addEventListener的方式来绑定Error事件，并且设置为True（捕获方式接收事件）
 
-* ##### 上报错误的基本原理
+* #####　上报错误的基本原理
 
   * 采用Ajax通信的方式上报
 

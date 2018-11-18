@@ -4,7 +4,7 @@ title: 'JavaScript 常用内置对象总结'
 subtitle: ' '
 date: 2017-10-21
 categories: JavaScript
-cover: 'http://oy6bua0oj.bkt.clouddn.com/Simple_Solar_2.jpg'
+cover: 'https://farm5.staticflickr.com/4911/44117310460_2abe7c5233_o.jpg'
 tags: javaScript
 ---
 

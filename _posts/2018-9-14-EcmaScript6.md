@@ -4,7 +4,7 @@ title: 'ECMAScript6'
 date: 2018-9-14
 subtitle: 'ES6基础'
 categories: 笔记
-cover: 'http://pbfh16fiv.bkt.clouddn.com/es6.png'
+cover: 'https://farm5.staticflickr.com/4805/44117243400_c3beab9d50_o.png'
 tags: ECMAScript6
 ---
 # ES6 基础

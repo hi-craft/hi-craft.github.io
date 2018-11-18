@@ -4,7 +4,7 @@ title: 'JavaScript高级程序设计随记'
 subtitle: ''
 date: 2017-10-30
 categories: 笔记
-cover: 'http://oy6bua0oj.bkt.clouddn.com/46453-106.jpg'
+cover: 'https://farm5.staticflickr.com/4907/32062207808_4ef2f46f2b_o.jpg'
 tags: JavaScript
 ---
 # js 高级 #
