@@ -3,7 +3,7 @@ layout: post
 title: 'Web知识点整理'
 date: 2018-9-26
 categories: 笔记
-cover: 'http://p7ik6bm59.bkt.clouddn.com/First%20Sight.jpg'
+cover: 'https://farm5.staticflickr.com/4888/44117325450_67b0a8a0ce_k.jpg'
 tags: note
 ---
 
